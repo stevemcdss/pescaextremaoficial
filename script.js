@@ -504,3 +504,32 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("keydown", e => {
     if (e.key === "Escape") document.querySelector(".foto-box.expandida")?.classList.remove("expandida");
   });
+
+  /* ========================================================
+   ANIMAÇÃO DE REVELAÇÃO SUAVE POR SEÇÃO (REVEAL ON SCROLL)
+   ======================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  // Marca o corpo da página como pronto para revelar
+  document.body.classList.add("has-reveal");
+
+  const elementosParaAnimar = document.querySelectorAll(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    const observador = new IntersectionObserver((entradas, obs) => {
+      entradas.forEach(entrada => {
+        if (entrada.isIntersecting) {
+          entrada.target.classList.add("is-visible");
+          obs.unobserve(entrada.target); // Anima uma única vez
+        }
+      });
+    }, {
+      rootMargin: "0px 0px -60px 0px", // Dispara pouco antes de aparecer completamente
+      threshold: 0.15
+    });
+
+    elementosParaAnimar.forEach(el => observador.observe(el));
+  } else {
+    // Fallback para navegadores muito antigos
+    elementosParaAnimar.forEach(el => el.classList.add("is-visible"));
+  }
+});
