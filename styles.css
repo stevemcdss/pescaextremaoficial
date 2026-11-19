@@ -29,20 +29,26 @@ html { scroll-behavior: smooth; scroll-padding-top: 108px; }
 /* Fundo Topográfico aplicado globalmente em todo o site */
 body {
   margin: 0;
+  padding: 0;
+  color: #ffffff;
   background-color: #070d16;
   background-image: 
-    radial-gradient(circle at 85% 15%, rgba(255, 98, 0, 0.09) 0%, transparent 35%),
-    radial-gradient(circle at 10% 45%, rgba(56, 189, 248, 0.06) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(255, 98, 0, 0.07) 0%, transparent 0%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Cpath d='M-100,100 C150,40 220,260 450,150 S720,40 800,200 M-100,210 C120,150 240,330 420,240 S680,170 800,310 M-100,320 C100,270 260,410 410,340 S660,280 800,430 M-100,440 C140,390 250,520 440,460 S630,390 800,540 M-100,550 C130,490 270,610 460,560 S670,500 800,660' fill='none' stroke='rgba(255,255,255,0.060)' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M-50,60 C90,190 310,130 410,310 S630,330 760,490 M-30,180 C110,290 290,250 390,420 S590,450 740,590' fill='none' stroke='rgba(56,189,248,0.060)' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: auto, auto, auto, 600px 600px;
-  background-position: center;
-  color: var(--ink);
-  font-family: var(--sans);
-  font-size: 15px;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
+    /* 1. Iluminação quente laranja suave no canto direito */
+    radial-gradient(circle at 85% 30%, rgba(255, 98, 0, 0.07) 0%, transparent 45%),
+    
+    /* 2. Iluminação ciano técnica no canto esquerdo */
+    radial-gradient(circle at 10% 70%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+
+    /* 3. Silhueta de peixe desportivo em marca de água */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400' fill='none'%3E%3Cpath d='M680,200 C620,130 460,90 280,140 C190,165 90,185 20,200 C90,215 190,235 280,260 C460,310 620,270 680,200 Z' fill='rgba(255,98,0,0.025)'/%3E%3Cpath d='M660,200 C730,140 780,90 770,70 C730,110 680,170 660,200 C680,230 730,290 770,330 C780,310 730,260 660,200 Z' fill='rgba(255,98,0,0.035)'/%3E%3Cpath d='M420,105 C460,50 510,40 550,50 C520,75 480,95 440,110 Z' fill='rgba(56,189,248,0.03)'/%3E%3Cpath d='M380,290 C430,340 480,345 510,335 C480,315 440,300 400,285 Z' fill='rgba(56,189,248,0.03)'/%3E%3C/svg%3E"),
+
+    /* 4. Linhas batimétricas contínuas */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='700' viewBox='0 0 1440 700' fill='none'%3E%3Cpath d='M-100 140 C 300 60, 700 240, 1100 130 C 1300 70, 1500 140, 1600 110' stroke='rgba(255,98,0,0.06)' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M-100 340 C 320 240, 750 440, 1150 310 C 1350 230, 1500 330, 1600 300' stroke='rgba(56,189,248,0.035)' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M-100 560 C 350 450, 780 650, 1180 510 C 1380 430, 1520 530, 1600 500' stroke='rgba(255,255,255,0.02)' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
+
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat-y;
+  background-position: top 20% right, bottom 20% left, 90% center, center top;
+  background-size: cover, cover, 600px auto, 100% auto;
+  background-attachment: fixed; /* O fundo permanece estável durante o scroll */
 }
 
 body.dialog-open { overflow: hidden; }
@@ -112,7 +118,7 @@ h3 { font-family: var(--serif); font-size: 28px; line-height: 1.25; letter-spaci
 .nav-open .menu-toggle span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
 
 /* Hero e Parallax */
-.hero { position: relative; min-height: 800px; min-height: min(880px, 110svh); color: #fff; background: var(--deep); isolation: isolate; overflow: hidden; }
+.hero { position: relative; min-height: 800px; min-height: min(880px, 110svh); color: #fff; background: transparent; isolation: isolate; overflow: hidden; }
 .hero-media, .hero-shade { position: absolute; inset: 0; z-index: -1; }
 .hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 67% center; transform: translate3d(0, var(--parallax-y, 0px), 0) scale(1.14); }
 .hero-shade { background: linear-gradient(90deg, rgba(7, 13, 22, 0.96) 0%, rgba(7, 13, 22, 0.8) 65%, rgba(7, 13, 22, 0.45) 100%), linear-gradient(0deg, rgba(7, 13, 22, 0.95), transparent 45%); }
@@ -152,20 +158,10 @@ h3 { font-family: var(--serif); font-size: 28px; line-height: 1.25; letter-spaci
 /* ========================================================
    ESTILOS: NOSSA TRAJETÓRIA COM FOTOS INTERATIVAS
    ======================================================== */
-/* Fundo com curvas topográficas/batimétricas e gradiente de profundidade */
 .trajetoria-section {
   position: relative;
   padding: 100px 0;
-  background-color: #070d16;
-  background-image: 
-    /* 1. Iluminação subtil quente e vinheta escura */
-    radial-gradient(circle at 18% 30%, rgba(255, 98, 0, 0.06) 0%, transparent 30%),
-    radial-gradient(circle at 85% 65%, rgba(56, 189, 248, 0.04) 0%, transparent 50%),
-    /* 2. Curvas de nível / linhas náuticas fluidas (SVG embutido) */
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='700' viewBox='0 0 1440 700' fill='none'%3E%3Cpath d='M-100 120 C 300 40, 700 240, 1100 110 C 1300 50, 1500 130, 1600 100' stroke='rgba(255,98,0,0.09)' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M-100 210 C 250 130, 650 330, 1050 200 C 1280 130, 1480 220, 1600 190' stroke='rgba(255,255,255,0.035)' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M-100 320 C 320 220, 750 430, 1150 290 C 1350 210, 1500 320, 1600 280' stroke='rgba(255,98,0,0.07)' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M-100 440 C 280 340, 680 540, 1080 400 C 1300 320, 1460 430, 1600 390' stroke='rgba(255,255,255,0.04)' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M-100 570 C 350 460, 780 660, 1180 520 C 1380 440, 1520 540, 1600 510' stroke='rgba(255,98,0,0.08)' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+  background: transparent;
   overflow: hidden;
 }
 
@@ -571,7 +567,7 @@ h3 { font-family: var(--serif); font-size: 28px; line-height: 1.25; letter-spaci
 /* ========================================================
    RODAPÉ E BOTÃO FLUTUANTE
    ======================================================== */
-.site-footer { background: rgba(7, 13, 22, 0.95); color: #dce4ed; padding-top: 44px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.site-footer { background: transparent; color: #dce4ed; padding-top: 44px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
 .footer-main { display: grid; gap: 27px; padding-bottom: 34px; }
 .footer-main>p { font-family: var(--serif); font-size: 18px; line-height: 1.5; color: #9bb0c3; }
 .footer-links { display: flex; flex-wrap: wrap; gap: 12px 23px; align-items: center; font-size: 11px; }
@@ -1239,7 +1235,7 @@ dialog::backdrop { background: rgba(7, 13, 22, 0.85); -webkit-backdrop-filter: b
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  cursor: zoom-out !important;
+  cursor: pointer !important;
   border: none !important;
   border-radius: 0 !important;
 }
