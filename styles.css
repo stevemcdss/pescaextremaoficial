@@ -1260,3 +1260,156 @@ dialog::backdrop { background: rgba(7, 13, 22, 0.85); -webkit-backdrop-filter: b
   border-radius: 8px !important;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.9) !important;
 }
+
+/* ========================================================
+   CENÁRIO FIXO: COQUEIRO COM IMAGEM PRÓPRIA + CATA-VENTOS
+   ======================================================== */
+.cenario-costeiro {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Não bloqueia cliques em botões */
+  z-index: 1;           /* Fica logo acima do fundo e atrás do conteúdo */
+  overflow: hidden;
+}
+
+
+/* Coloca todo o conteúdo do site à frente do cenário */
+#conteudo,
+main,
+.site-footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* Moldura que posiciona a sua imagem */
+/* Base comum para os dois lados */
+.coqueiro-wrap {
+  position: absolute;
+  bottom: -10px;
+  width: min(700px, 60vw);
+  height: 98vh;
+  max-height: 1050px;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 18px rgba(0, 0, 0, 0.85));
+}
+
+/* Lado Esquerdo */
+.coqueiro-esq {
+  left: -20px;
+}
+
+/* Lado Direito (espelhado horizontalmente para as folhas apontarem para dentro) */
+.coqueiro-dir {
+  right: -20px;
+  transform: scaleX(-1);
+}
+
+/* A sua imagem e os parâmetros de balanço */
+/* Coqueiro com a máscara SVG e a paleta náutica (Azul Marinho + Ciano) */
+/* Coqueiro garantido: visível, translúcido e no tom náutico */
+.coqueiro-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: bottom left;
+  transform-origin: 18% 95%;
+  animation: balancoVentoNatural 7s ease-in-out infinite alternate;
+
+  /* Opacidade suave para fundir no azul marinho como marca d'água */
+  opacity: 0.45;
+
+  /* Brilho ciano técnico nas bordas da silhueta (Opção B) */
+  filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.45));
+}
+
+/* Animação de brisa suave */
+@keyframes balancoVentoNatural {
+  0% {
+    transform: rotate(0deg) skewX(0deg);
+  }
+  50% {
+    transform: rotate(2deg) skewX(0.7deg);
+  }
+  100% {
+    transform: rotate(-1.3deg) skewX(-0.5deg);
+  }
+}
+
+/* --- CATA-VENTOS (AEROGERADORES) --- */
+.parque-eolico {
+  position: absolute;
+  bottom: 120px;
+  right: 6%;            /* Posicionados no horizonte do lado direito */
+  display: flex;
+  gap: 40px;
+  align-items: flex-end;
+  opacity: 0.25;
+}
+
+.aerogerador {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #38bdf8;
+}
+
+.aerogerador .torre {
+  width: 3px;
+  height: 90px;
+  background: linear-gradient(to top, rgba(56, 189, 248, 0.3), rgba(56, 189, 248, 0.8));
+  clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+}
+
+.aerogerador .nacelle-helice {
+  position: absolute;
+  top: -24px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aerogerador .pas-helice {
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 50%;
+  animation: girarCataVento 4.8s linear infinite;
+}
+
+.cata-vento-2 {
+  opacity: 0.7;
+}
+
+.cata-vento-2 .torre {
+  height: 65px;
+}
+
+.cata-vento-2 .nacelle-helice {
+  top: -18px;
+  width: 38px;
+  height: 38px;
+}
+
+.cata-vento-2 .pas-helice {
+  animation-duration: 6.2s;
+}
+
+@keyframes girarCataVento {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Em telas pequenas de celular, oculta para não cobrir o texto */
+@media (max-width: 768px) {
+  .coqueiro-wrap {
+    display: none;
+  }
+  .parque-eolico {
+    bottom: 80px;
+  }
+}
