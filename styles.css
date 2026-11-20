@@ -355,7 +355,6 @@ h3 { font-family: var(--serif); font-size: 28px; line-height: 1.25; letter-spaci
    SEÇÃO: PACOTES
    ======================================================== */
 .packages-section { background: transparent; color: #eff3f7; position: relative; overflow: hidden; }
-.packages-section::before { content: ""; position: absolute; width: 600px; height: 600px; right: -450px; top: 120px; border: 1px solid rgba(56, 189, 248, 0.12); border-radius: 50%; box-shadow: 0 0 0 75px rgba(56, 189, 248, 0.04), 0 0 0 150px rgba(56, 189, 248, 0.02); pointer-events: none; }
 .centered { text-align: center; position: relative; }
 .centered .eyebrow { justify-content: center; }
 .centered>p { margin-inline: auto; max-width: 580px; }
