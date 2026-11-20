@@ -26,7 +26,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 108px; }
 
-/* Fundo Topográfico aplicado globalmente em todo o site */
+/* Fundo Topográfico global */
 body {
   margin: 0;
   padding: 0;
@@ -39,15 +39,13 @@ body {
     /* 2. Iluminação ciano técnica no canto esquerdo */
     radial-gradient(circle at 10% 70%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
 
-    /* 3. Silhueta de peixe desportivo em marca de água */
-    
-
-    /* 4. Linhas batimétricas contínuas */
+    /* 3. Linhas batimétricas contínuas */
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='700' viewBox='0 0 1440 700' fill='none'%3E%3Cpath d='M-100 140 C 300 60, 700 240, 1100 130 C 1300 70, 1500 140, 1600 110' stroke='rgba(255,98,0,0.06)' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M-100 340 C 320 240, 750 440, 1150 310 C 1350 230, 1500 330, 1600 300' stroke='rgba(56,189,248,0.035)' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M-100 560 C 350 450, 780 650, 1180 510 C 1380 430, 1520 530, 1600 500' stroke='rgba(255,255,255,0.02)' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
 
-  background-repeat: no-repeat, no-repeat, no-repeat, repeat-y;
-  background-position: top 20% right, bottom 20% left, 90% center, center top;
-  background-attachment: fixed; /* O fundo permanece estável durante o scroll */
+  background-repeat: no-repeat, no-repeat, repeat-y;
+  background-position: top 20% right, bottom 20% left, center top;
+  background-size: cover, cover, 100% auto;
+  background-attachment: fixed;
 }
 
 body.dialog-open { overflow: hidden; }
@@ -119,8 +117,24 @@ h3 { font-family: var(--serif); font-size: 28px; line-height: 1.25; letter-spaci
 /* Hero e Parallax */
 .hero { position: relative; min-height: 800px; min-height: min(880px, 110svh); color: #fff; background: transparent; isolation: isolate; overflow: hidden; }
 .hero-media, .hero-shade { position: absolute; inset: 0; z-index: -1; }
-.hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 67% center; transform: translate3d(0, var(--parallax-y, 0px), 0) scale(1.14); }
-.hero-shade { background: linear-gradient(90deg, rgba(7, 13, 22, 0.96) 0%, rgba(7, 13, 22, 0.8) 65%, rgba(7, 13, 22, 0.45) 100%), linear-gradient(0deg, rgba(7, 13, 22, 0.95), transparent 45%); }
+
+/* Imagem do Hero: Desvanece à esquerda revelando o fundo/coqueiro e sólida à direita */
+.hero-media img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  object-position: 67% center; 
+  transform: translate3d(0, var(--parallax-y, 0px), 0) scale(1.14);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.2) 20%, #000 55%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.2) 20%, #000 55%);
+}
+
+/* Camada suave de leitura: translúcida à esquerda para exibir o coqueiro */
+.hero-shade { 
+  background: linear-gradient(90deg, rgba(7, 13, 22, 0.5) 0%, rgba(7, 13, 22, 0.2) 40%, transparent 70%), 
+              linear-gradient(0deg, rgba(7, 13, 22, 0.7) 0%, transparent 35%); 
+}
+
 .hero-inner { position: relative; min-height: inherit; padding-top: 170px; padding-bottom: 132px; display: flex; align-items: center; }
 .hero-copy { width: 100%; max-width: 740px; }
 .hero .eyebrow { font-size: 8px; letter-spacing: 1.65px; margin-bottom: 28px; max-width: 100%; }
@@ -152,8 +166,6 @@ h3 { font-family: var(--serif); font-size: 28px; line-height: 1.25; letter-spaci
   pointer-events: none;
 }
 
-
-
 /* ========================================================
    ESTILOS: NOSSA TRAJETÓRIA COM FOTOS INTERATIVAS
    ======================================================== */
@@ -164,7 +176,6 @@ h3 { font-family: var(--serif); font-size: 28px; line-height: 1.25; letter-spaci
   overflow: hidden;
 }
 
-/* Divisória subtil superior e inferior para harmonizar com as outras secções */
 .trajetoria-section::before {
   content: "";
   position: absolute;
@@ -192,7 +203,6 @@ h3 { font-family: var(--serif); font-size: 28px; line-height: 1.25; letter-spaci
   align-items: center;
 }
 
-/* Tipografia e Títulos */
 .trajetoria-badge {
   display: inline-block;
   padding: 6px 14px;
@@ -233,7 +243,6 @@ h3 { font-family: var(--serif); font-size: 28px; line-height: 1.25; letter-spaci
   margin-bottom: 30px;
 }
 
-/* Cards dos Pilares */
 .trajetoria-pilares {
   display: flex;
   flex-direction: column;
@@ -292,7 +301,7 @@ h3 { font-family: var(--serif); font-size: 28px; line-height: 1.25; letter-spaci
 }
 
 /* ========================================================
-   NOVA GRADE DE FOTOS (1 GRANDE NO TOPO + 2 LADO A LADO)
+   GRADE DE FOTOS DA TRAJETÓRIA
    ======================================================== */
 .trajetoria-fotos-stack {
   padding-top: 50px;
@@ -330,29 +339,22 @@ h3 { font-family: var(--serif); font-size: 28px; line-height: 1.25; letter-spaci
   transform: scale(1.04);
 }
 
-/* 1ª Foto: Ocupa a largura total (as 2 colunas) */
 .foto-box.foto-top {
   grid-column: 1 / -1;
   height: 300px;
 }
 
-/* 2 Fotos de baixo: Ficam divididas lado a lado */
 .foto-box.foto-sub {
   height: 300px;
 }
 
-/* Ajuste para celular */
 @media (max-width: 900px) {
-  .foto-box.foto-top {
-    height: 240px;
-  }
-  .foto-box.foto-sub {
-    height: 140px;
-  }
+  .foto-box.foto-top { height: 240px; }
+  .foto-box.foto-sub { height: 140px; }
 }
 
 /* ========================================================
-   SEÇÃO: PACOTES
+   SEÇÃO: PACOTES (SEM O CÍRCULO / RADAR)
    ======================================================== */
 .packages-section { background: transparent; color: #eff3f7; position: relative; overflow: hidden; }
 .centered { text-align: center; position: relative; }
@@ -624,7 +626,6 @@ dialog::backdrop { background: rgba(7, 13, 22, 0.85); -webkit-backdrop-filter: b
   .hero h1 { font-size: 76px; }
   .hero-description { max-width: 410px; font-size: 15px; }
   .hero .eyebrow { font-size: 10px; }
-  .hero-shade { background: linear-gradient(90deg, rgba(7, 13, 22, 0.96) 0%, rgba(7, 13, 22, 0.85) 42%, rgba(7, 13, 22, 0.4) 100%), linear-gradient(0deg, rgba(7, 13, 22, 0.9), transparent 45%); }
   .hero-copy { max-width: 660px; }
   .hero-location { display: flex; align-items: center; gap: 10px; position: absolute; bottom: 45px; right: 0; }
   .hero-location svg { width: 24px; height: 24px; fill: none; stroke: var(--accent); stroke-width: 1.2; }
@@ -665,8 +666,6 @@ dialog::backdrop { background: rgba(7, 13, 22, 0.85); -webkit-backdrop-filter: b
   .hero h1 { font-size: clamp(65px, 6.8vw, 90px); letter-spacing: -2.6px; }
   .hero .eyebrow { margin-bottom: 31px; }
   .hero-description { max-width: 380px; font-size: 14px; }
-  .hero-media img { object-position: 62% 47%; }
-  .hero-shade { background: linear-gradient(90deg, rgba(7, 13, 22, 0.98) 0%, rgba(7, 13, 22, 0.88) 38%, rgba(7, 13, 22, 0.4) 67%, rgba(7, 13, 22, 0.15) 100%), linear-gradient(0deg, rgba(7, 13, 22, 0.9), transparent 43%); }
   .hero-actions { margin-top: 31px; gap: 25px; }
   .hero-actions .button { font-size: 12px; padding: 16px 22px; }
   .hero-note { font-size: 10px; margin-top: 22px; }
@@ -792,7 +791,6 @@ dialog::backdrop { background: rgba(7, 13, 22, 0.85); -webkit-backdrop-filter: b
   body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
 }
 
-
 /* Enquadramento da foto no cabeçalho */
 .hero-media img,
 .hero--real-photo .hero-media img {
@@ -803,9 +801,10 @@ dialog::backdrop { background: rgba(7, 13, 22, 0.85); -webkit-backdrop-filter: b
   object-position: 65% 18% !important;
   transform-origin: 65% 18%;
   transform: translate3d(0, var(--parallax-y, 0px), 0) scale(1.02);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.2) 20%, #000 55%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.2) 20%, #000 55%);
 }
 
-/* Ecrãs largos de computador */
 @media (min-width: 960px) {
   .hero-media img,
   .hero--real-photo .hero-media img {
@@ -815,7 +814,6 @@ dialog::backdrop { background: rgba(7, 13, 22, 0.85); -webkit-backdrop-filter: b
   }
 }
 
-/* Telemóveis */
 @media (max-width: 599px) {
   .hero-media img,
   .hero--real-photo .hero-media img {
@@ -825,7 +823,7 @@ dialog::backdrop { background: rgba(7, 13, 22, 0.85); -webkit-backdrop-filter: b
 }
 
 /* ========================================================
-   SEÇÃO 5 RIOS E MODAL INFALÍVEL
+   SEÇÃO 5 RIOS E MODAL
    ======================================================== */
 .roteiros-minimal {
   position: relative;
@@ -851,7 +849,6 @@ dialog::backdrop { background: rgba(7, 13, 22, 0.85); -webkit-backdrop-filter: b
   margin: 0;
 }
 
-/* Grid de 5 Colunas */
 .rios-track {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -962,7 +959,6 @@ dialog::backdrop { background: rgba(7, 13, 22, 0.85); -webkit-backdrop-filter: b
 .rio-arrow i { font-style: normal; font-size: 14px; }
 .rio-card:hover .rio-arrow { gap: 10px; color: var(--accent-hover); }
 
-/* Responsividade Mobile para a Grade */
 @media (max-width: 1024px) {
   .rios-track { grid-template-columns: repeat(3, 1fr); }
 }
@@ -1196,7 +1192,6 @@ dialog::backdrop { background: rgba(7, 13, 22, 0.85); -webkit-backdrop-filter: b
   height: 100%;
   border: 0;
   display: block;
-  /* Filtro sutil para harmonizar o mapa com o tema escuro do site */
   filter: contrast(1.05) saturate(1.1);
 }
 
@@ -1233,7 +1228,7 @@ dialog::backdrop { background: rgba(7, 13, 22, 0.85); -webkit-backdrop-filter: b
   100% { transform: scale(0.95); opacity: 0.7; }
 }
 
-/* Ao clicar na foto, ela ocupa a tela inteira */
+/* Lightbox de foto expandida */
 .foto-box.expandida {
   position: fixed !important;
   inset: 0 !important;
@@ -1260,20 +1255,18 @@ dialog::backdrop { background: rgba(7, 13, 22, 0.85); -webkit-backdrop-filter: b
 }
 
 /* ========================================================
-   CENÁRIO FIXO: COQUEIRO COM IMAGEM PRÓPRIA + CATA-VENTOS
+   CENÁRIO FIXO: COQUEIROS LATERAIS E CATA-VENTOS
    ======================================================== */
 .cenario-costeiro {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
-  pointer-events: none; /* Não bloqueia cliques em botões */
-  z-index: 1;           /* Fica logo acima do fundo e atrás do conteúdo */
+  pointer-events: none;
+  z-index: 0;
   overflow: hidden;
 }
 
-
-/* Coloca todo o conteúdo do site à frente do cenário */
 #conteudo,
 main,
 .site-footer {
@@ -1281,8 +1274,6 @@ main,
   z-index: 2;
 }
 
-/* Moldura que posiciona a sua imagem */
-/* Base comum para os dois lados */
 .coqueiro-wrap {
   position: absolute;
   bottom: -10px;
@@ -1293,20 +1284,15 @@ main,
   filter: drop-shadow(0 0 18px rgba(0, 0, 0, 0.85));
 }
 
-/* Lado Esquerdo */
 .coqueiro-esq {
   left: -20px;
 }
 
-/* Lado Direito (espelhado horizontalmente para as folhas apontarem para dentro) */
 .coqueiro-dir {
   right: -20px;
   transform: scaleX(-1);
 }
 
-/* A sua imagem e os parâmetros de balanço */
-/* Coqueiro com a máscara SVG e a paleta náutica (Azul Marinho + Ciano) */
-/* Coqueiro garantido: visível, translúcido e no tom náutico */
 .coqueiro-img {
   width: 100%;
   height: 100%;
@@ -1315,24 +1301,12 @@ main,
   object-position: bottom left;
   transform-origin: 18% 95%;
   animation: balancoVentoNatural 7s ease-in-out infinite alternate;
-
-  /* Opacidade suave para fundir no azul marinho como marca d'água */
   opacity: 0.45;
-
-  /* Brilho ciano técnico nas bordas da silhueta (Opção B) */
   filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.45));
 }
 
-/* Animação de brisa suave */
 @keyframes balancoVentoNatural {
-  0% {
-    transform: rotate(0deg) skewX(0deg);
-  }
-  50% {
-    transform: rotate(2deg) skewX(0.7deg);
-  }
-  100% {
-    transform: rotate(-1.3deg) skewX(-0.5deg);
-  }
+  0% { transform: rotate(0deg) skewX(0deg); }
+  50% { transform: rotate(2deg) skewX(0.7deg); }
+  100% { transform: rotate(-1.3deg) skewX(-0.5deg); }
 }
-
