@@ -40,14 +40,13 @@ body {
     radial-gradient(circle at 10% 70%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
 
     /* 3. Silhueta de peixe desportivo em marca de água */
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400' fill='none'%3E%3Cpath d='M680,200 C620,130 460,90 280,140 C190,165 90,185 20,200 C90,215 190,235 280,260 C460,310 620,270 680,200 Z' fill='rgba(255,98,0,0.025)'/%3E%3Cpath d='M660,200 C730,140 780,90 770,70 C730,110 680,170 660,200 C680,230 730,290 770,330 C780,310 730,260 660,200 Z' fill='rgba(255,98,0,0.035)'/%3E%3Cpath d='M420,105 C460,50 510,40 550,50 C520,75 480,95 440,110 Z' fill='rgba(56,189,248,0.03)'/%3E%3Cpath d='M380,290 C430,340 480,345 510,335 C480,315 440,300 400,285 Z' fill='rgba(56,189,248,0.03)'/%3E%3C/svg%3E"),
+    
 
     /* 4. Linhas batimétricas contínuas */
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='700' viewBox='0 0 1440 700' fill='none'%3E%3Cpath d='M-100 140 C 300 60, 700 240, 1100 130 C 1300 70, 1500 140, 1600 110' stroke='rgba(255,98,0,0.06)' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M-100 340 C 320 240, 750 440, 1150 310 C 1350 230, 1500 330, 1600 300' stroke='rgba(56,189,248,0.035)' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M-100 560 C 350 450, 780 650, 1180 510 C 1380 430, 1520 530, 1600 500' stroke='rgba(255,255,255,0.02)' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
 
   background-repeat: no-repeat, no-repeat, no-repeat, repeat-y;
   background-position: top 20% right, bottom 20% left, 90% center, center top;
-  background-size: cover, cover, 600px auto, 100% auto;
   background-attachment: fixed; /* O fundo permanece estável durante o scroll */
 }
 
