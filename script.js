@@ -541,7 +541,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const video = document.getElementById("heroVideo");
   if (!video) return;
 
-  const tempoEsperaFoto = 4500; // 3.5 segundos na foto antes do vídeo
+  const tempoEsperaFoto = 3500; // 3.5 segundos na foto antes do vídeo
   let temporizadorPlay = null;
 
   function iniciarVideoComFade() {
