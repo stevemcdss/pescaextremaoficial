@@ -576,7 +576,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 2. Monitoriza o movimento da barra de rolagem (scroll)
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 120) {
+    if (window.scrollY > 600) {
       // Desceu a página: volta para a foto
       voltarParaFoto();
     } else {
