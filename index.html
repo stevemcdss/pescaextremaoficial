@@ -45,7 +45,15 @@
   <main id="conteudo">
     <!-- 1. HERO — foto original fornecida pela operação Pesca Extrema. -->
     <section class="hero hero--real-photo" id="inicio" aria-labelledby="hero-title" data-parallax="0.12">
-      <div class="hero-media"><img class="parallax-image" src="assets/topo-pesca-extrema.png" width="2048" height="1152" alt="Pescador segurando uma grande captura na água, ao lado do barco — foto da Pesca Extrema" fetchpriority="high" decoding="async"></div>
+      <div class="hero-media">
+        <!-- Foto principal -->
+        <img class="parallax-image" src="assets/topo-pesca-extrema.png" alt="Pesca Esportiva Pesca Extrema" width="2048" height="1152">
+
+        <!-- Vídeo que entra depois com transição suave -->
+        <video id="heroVideo" muted loop playsinline preload="auto">
+          <source src="assets/video1.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="hero-shade"></div>
       <div class="container hero-inner">
         <div class="hero-copy">

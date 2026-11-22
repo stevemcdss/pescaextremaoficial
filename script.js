@@ -533,3 +533,57 @@ document.addEventListener("DOMContentLoaded", () => {
     elementosParaAnimar.forEach(el => el.classList.add("is-visible"));
   }
 });
+
+/* ========================================================
+   TRANSIÇÃO FOTO <-> VÍDEO NO CABEÇALHO COM RETORNO NO SCROLL
+   ======================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  const video = document.getElementById("heroVideo");
+  if (!video) return;
+
+  const tempoEsperaFoto = 3500; // 3.5 segundos na foto antes do vídeo
+  let temporizadorPlay = null;
+
+  function iniciarVideoComFade() {
+    clearTimeout(temporizadorPlay);
+    temporizadorPlay = setTimeout(() => {
+      // Apenas inicia se o utilizador ainda estiver no topo da página
+      if (window.scrollY < 80) {
+        const promessaPlay = video.play();
+        if (promessaPlay !== undefined) {
+          promessaPlay
+            .then(() => {
+              video.classList.add("is-playing");
+            })
+            .catch((err) => console.log("Autoplay bloqueado:", err));
+        }
+      }
+    }, tempoEsperaFoto);
+  }
+
+  function voltarParaFoto() {
+    clearTimeout(temporizadorPlay);
+    video.classList.remove("is-playing"); // Faz o fade-out suave de volta para a foto
+    setTimeout(() => {
+      if (!video.classList.contains("is-playing")) {
+        video.pause(); // Pausa a reprodução para poupar desempenho
+      }
+    }, 1800); // Aguarda o tempo da transição do CSS antes de pausar
+  }
+
+  // 1. Inicia o ciclo da primeira vez que a página carrega
+  iniciarVideoComFade();
+
+  // 2. Monitoriza o movimento da barra de rolagem (scroll)
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 80) {
+      // Desceu a página: volta para a foto
+      voltarParaFoto();
+    } else {
+      // Voltou ao topo: aguarda os segundos e reativa o vídeo
+      if (!video.classList.contains("is-playing") && !temporizadorPlay) {
+        iniciarVideoComFade();
+      }
+    }
+  }, { passive: true });
+});
